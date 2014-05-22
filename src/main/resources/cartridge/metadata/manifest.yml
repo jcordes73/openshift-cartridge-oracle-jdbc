@@ -1,0 +1,52 @@
+Name: oraclejdbc
+Cartridge-Short-Name: OracleJDBC
+Display-Name: Oracle JDBC ${oracle.jdbc.version}
+Description: "This cartridge install a Oracle JDBC driver as a EAP 6 module and configures a Oracle JDBC datasource."
+Version: '${oracle.jdbc.version}'
+License: ASL 2.0
+
+Vendor: Red Hat
+Cartridge-Version: ${project.version}
+Cartridge-Vendor: redhat
+
+Categories:
+  - service
+  - database
+  - embedded
+Cart-Data:
+- Key: username
+  Type: cart_data
+  Description: User on Oracle database
+- Key: password
+  Type: cart_data
+  Description: Password for user on Oracle database
+- Key: database_name
+  Type: cart_data
+  Description: Oracle DB name
+- Key: connection_url
+  Type: cart_data
+  Description: Oracle DB connection URL
+Website: https://www.redhat.com/products/cloud-computing/openshift-enterprise/
+Help-Topics:
+  "Cartridge Specification Guide": https://access.redhat.com/site/documentation/en-US/OpenShift_Enterprise/2/html-single/Cartridge_Specification_Guide/
+  "User Guide": https://access.redhat.com/site/documentation/en-US/OpenShift_Enterprise/2/html-single/User_Guide/
+  "Administration Guide": https://access.redhat.com/site/documentation/en-US/OpenShift_Enterprise/2/html-single/Administration_Guide/
+Provides:
+  - "oraclejdbc"
+Requires:
+  - "jbosseap"
+Conflicts:
+Native-Requires:
+Architecture: noarch
+Reservations:
+Components:
+  default:
+    Service-Dependencies:
+    Publishes:
+    Subscribes:
+Publishes:
+Subscribes:
+Scaling:
+  Min: 1
+  Max: -1
+  

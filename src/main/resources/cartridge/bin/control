@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+function status() {
+  client_result "Oracle-JDBC configuration ${project.version} is set up."
+}
+
+case "$1" in
+  status)       status ;;
+  *)              exit 0
+esac

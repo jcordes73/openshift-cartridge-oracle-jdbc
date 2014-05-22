@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.metrosystems.oracle</groupId>
+	<artifactId>openshift-cartridge-oracle-jdbc</artifactId>
+	<version>1.0.0</version>
+	<packaging>rpm</packaging>
+
+	<name>openshift-cartridge-oracle-jdbc</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<oracle.jdbc.version>11.2.0.3.0</oracle.jdbc.version>
+		<oracle.db.host>localhost</oracle.db.host>
+		<oracle.db.port>1521</oracle.db.port>
+		<oracle.db.name>SID</oracle.db.name>
+		<oracle.db.username>scott</oracle.db.username>
+		<oracle.db.password>tiger</oracle.db.password>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/*.jar</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.jar</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<version>2.1-alpha-3</version>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>rpm-maven-plugin</artifactId>
+					<extensions>true</extensions>
+					<executions>
+						<execution>
+							<id>attach-rpm</id>
+							<goals>
+								<goal>attached-rpm</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<name>openshift-cartridge-oracle-jdbc</name>
+						<finalName>${project.artifactId}-${project.version}</finalName>
+						<appendAssemblyId>false</appendAssemblyId>
+						<versionProperty>${project.version}</versionProperty>
+						<summary>OpenShift cartridge which embeds Oracle JDBC configuration in EAP 6</summary>
+						<group>Applications/Systems</group>
+						<defaultFilemode>755</defaultFilemode>
+						<defaultGroupname>root</defaultGroupname>
+						<copyright>LGPL</copyright>
+						<needarch>noarch</needarch>
+						<description>OpenShift cartridge which embeds Oracle JDBC configuration in EAP 6</description>
+						<mappings>
+							<mapping>
+								<directory>/usr/libexec/openshift/cartridges/oraclejdbc</directory>
+								<sources>
+									<source>
+										<location>target/classes/cartridge</location>
+									</source>
+								</sources>
+							</mapping>
+							<mapping>
+								<directory>/usr/share/jbossas/modules</directory>
+								<sources>
+									<source>
+										<location>target/classes/modules</location>
+									</source>
+								</sources>
+							</mapping>
+						</mappings>
+						<postinstallScriptlet>
+						  <scriptFile>target/classes/rpm/bin/postinstall.sh</scriptFile>
+						</postinstallScriptlet>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

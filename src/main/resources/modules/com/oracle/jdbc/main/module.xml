@@ -1,0 +1,9 @@
+<module xmlns="urn:jboss:module:1.1" name="com.oracle.jdbc">
+  <resources>
+    <resource-root path="ojdbc6-${oracle.jdbc.version}.jar"/>
+  </resources>
+  <dependencies>
+    <module name="javax.api"/>
+    <module name="javax.transaction.api"/>
+  </dependencies>
+</module>
