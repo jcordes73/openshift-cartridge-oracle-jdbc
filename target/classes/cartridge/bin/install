@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Embeds Oracle-JDBC configuration into an JBoss EAP instance
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+env_dir="${OPENSHIFT_ORACLEJDBC_DIR}/env"
+
+PICKETBOX=${OPENSHIFT_JBOSSEAP_DIR}/modules/system/layers/base/org/picketbox/main/picketbox.jar
+JBOSS_LOGGING=${OPENSHIFT_JBOSSEAP_DIR}/modules/system/layers/base/org/jboss/logging/main/jboss-logging.jar
+
+username=scott
+password=
+oracle_db_host=localhost
+oracle_db_port=1521
+oracle_db_name=SID
+
+set_env_var 'OPENSHIFT_ORACLE_DB_USERNAME' $username $env_dir
+set_env_var 'OPENSHIFT_ORACLE_DB_PASSWORD' $password $env_dir
+set_env_var 'OPENSHIFT_ORACLE_DB_HOST' $oracle_db_host $env_dir
+set_env_var 'OPENSHIFT_ORACLE_DB_PORT' $oracle_db_port $env_dir
+set_env_var 'OPENSHIFT_ORACLE_DB_NAME' $oracle_db_name $env_dir
+
+conn_url='jdbc:oracle:thin:@$OPENSHIFT_ORACLE_DB_HOST:$OPENSHIFT_ORACLE_DB_PORT:$OPENSHIFT_ORACLE_DB_NAME'
+
+cart_props "connection_url=${conn_url}"
+cart_props "username=${username}"
+cart_props "password=${password}"
+cart_props "database_name=${oracle_db_name}"
+
+${OPENSHIFT_JBOSSEAP_DIR}/bin/tools/jboss-cli.sh -c --controller=${OPENSHIFT_JBOSSEAP_IP}:${OPENSHIFT_JBOSSEAP_MANAGEMENT_NATIVE_PORT} --file=${OPENSHIFT_ORACLEJDBC_DIR}/configuration/oraclejdbc.cli
+cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_REPO_DIR}/.openshift/config/
+
+${OPENSHIFT_JBOSSEAP_DIR}/bin/control restart
+
+client_result "Oracle JDBC 11.2.0.3.0 added."
