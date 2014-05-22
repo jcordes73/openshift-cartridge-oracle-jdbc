@@ -27,6 +27,7 @@ mvn clean install
 Below you can find information on what properties are used and can be overriden by passing system properties (i.e. using -D{name})
 
 |Property|Default|
+|--------|-------|
 |oracle.jdbc.version|11.2.0.3.0|
 |oracle.db.host|localhost|
 |oracle.db.port|1521|
