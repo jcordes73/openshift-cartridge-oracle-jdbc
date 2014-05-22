@@ -1,9 +1,8 @@
 # openshift-cartridge-oracle-jdbc
-===============================
 
 ## Description
 
-An OpenShift cartridge for provisioning a Oracle JDBC driver an a Oracle datasource.
+An OpenShift cartridge for provisioning a Oracle JDBC driver and a Oracle datasourc on JBoss EAP 6 cartridge.
 
 ## Adding Oracle JDBC driver
 
@@ -24,6 +23,16 @@ Just execute (after setting mvn on the PATH):
 ```bash
 mvn clean install
 ```
+
+Below you can find information on what properties are used and can be overriden by passing system properties (i.e. using -D{name})
+
+|Property|Default|
+|oracle.jdbc.version|11.2.0.3.0|
+|oracle.db.host|localhost|
+|oracle.db.port|1521|
+|oracle.db.name|SID|
+|oracle.db.username|scott|
+|oracle.db.password|tiger|
 
 ## Install
 
