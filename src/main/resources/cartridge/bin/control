@@ -3,7 +3,7 @@
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 function status() {
-  client_result "Oracle-JDBC configuration ${project.version} is set up."
+  client_result "Oracle JDBC cartridge ${project.version} is set up."
 }
 
 case "$1" in

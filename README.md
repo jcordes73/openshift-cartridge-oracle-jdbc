@@ -11,7 +11,7 @@ First you have to download the Oracle JDBC driver from http://www.oracle.com/tec
 Afterwards copy the Oracle JDBC driver into the project
 
 ```bash
-cp ojdbc6-${oracle.jdbc.version}.jar src/main/resources/modules/com/oracle/jdbc/main
+cp ojdbc6.jar src/main/resources/modules/com/oracle/jdbc/main
 ```
 
 ## Build
@@ -28,12 +28,13 @@ Below you can find information on what properties are used and can be overriden 
 
 |Property|Default|
 |--------|-------|
-|oracle.jdbc.version|11.2.0.3.0|
-|oracle.db.host|localhost|
-|oracle.db.port|1521|
-|oracle.db.name|SID|
+|oracle.db.host|MYHOST|
+|oracle.db.port|MYHOST|
+|oracle.db.schemaName|SID|
 |oracle.db.username|scott|
 |oracle.db.password|tiger|
+|rpm.key.name|D3AABAF5|
+|rpm.key.passphrase|redhat|
 
 ## Install
 
@@ -80,3 +81,16 @@ Finally you delete the cartridge using this command
 ```bash
 oo-admin-cartridge -a erase --name oraclejdbc --version ${oracle.jdbc.version} --cartridge_version ${project.version}
 ```
+
+## Cartridge creation
+
+When creating the cartridge you can pass the following environment variables to override the defaults specified in the pom.xml earlier:
+
+|Name|Default (pom.xml)|
+|----|------------------|
+|OPENSHIFT_ORACLEJDBC_JNDI_NAME|oracle.jdbc.jndiName|
+|OPENSHIFT_ORACLEJDBC_HOST|oracle.db.host|
+|OPENSHIFT_ORACLEJDBC_PORT|oracle.db.port|
+|OPENSHIFT_ORACLEJDBC_SCHEMA_NAME|oracle.db.schemaName|
+|OPENSHIFT_ORACLEJDBC_USERNAME|oracle.db.username|
+|OPENSHIFT_ORACLEJDBC_PASSWORD|oracle.db.password|

@@ -4,33 +4,60 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
+case "$1" in
+  -v|--version) oracle_jdbc_version="$2"
+  ;;
+  *) oracle_jdbc_version="${oracle.jdbc.version}"
+  ;;
+esac
+
 env_dir="${OPENSHIFT_ORACLEJDBC_DIR}/env"
 
-PICKETBOX=${OPENSHIFT_JBOSSEAP_DIR}/modules/system/layers/base/org/picketbox/main/picketbox.jar
-JBOSS_LOGGING=${OPENSHIFT_JBOSSEAP_DIR}/modules/system/layers/base/org/jboss/logging/main/jboss-logging.jar
+if [ "x$OPENSHIFT_ORACLEJDBC_JNDI_NAME" == "x" ]; then
+  OPENSHIFT_ORACLEJDBC_JNDI_NAME="${oracle.db.jndiName}"
+  set_env_var 'OPENSHIFT_ORACLEJDBC_JNDI_NAME' "$OPENSHIFT_ORACLEJDBC_JNDI_NAME" $env_dir
+fi
 
-username=${oracle.db.username}
-password=
-oracle_db_host=${oracle.db.host}
-oracle_db_port=${oracle.db.port}
-oracle_db_name=${oracle.db.name}
+if [ "x$OPENSHIFT_ORACLEJDBC_HOST" == "x" ]; then
+  OPENSHIFT_ORACLEJDBC_HOST="${oracle.db.host}"
+  set_env_var 'OPENSHIFT_ORACLEJDBC_HOST' "$OPENSHIFT_ORACLEJDBC_HOST" $env_dir
+fi
 
-set_env_var 'OPENSHIFT_ORACLE_DB_USERNAME' $username $env_dir
-set_env_var 'OPENSHIFT_ORACLE_DB_PASSWORD' $password $env_dir
-set_env_var 'OPENSHIFT_ORACLE_DB_HOST' $oracle_db_host $env_dir
-set_env_var 'OPENSHIFT_ORACLE_DB_PORT' $oracle_db_port $env_dir
-set_env_var 'OPENSHIFT_ORACLE_DB_NAME' $oracle_db_name $env_dir
+if [ "x$OPENSHIFT_ORACLEJDBC_PORT" == "x" ]; then
+  OPENSHIFT_ORACLEJDBC_PORT="${oracle.db.port}"
+  set_env_var 'OPENSHIFT_ORACLEJDBC_PORT' "$OPENSHIFT_ORACLEJDBC_PORT" $env_dir
+fi
 
-conn_url='jdbc:oracle:thin:@$OPENSHIFT_ORACLE_DB_HOST:$OPENSHIFT_ORACLE_DB_PORT:$OPENSHIFT_ORACLE_DB_NAME'
+if [ "x$OPENSHIFT_ORACLEJDBC_SCHEMA_NAME" == "x" ]; then
+  OPENSHIFT_ORACLEJDBC_SCHEMA_NAME="${oracle.db.schemaName}"
+  set_env_var 'OPENSHIFT_ORACLEJDBC_SCHEMA_NAME' "$OPENSHIFT_ORACLEJDBC_SCHEMA_NAME" $env_dir
+fi
 
-cart_props "connection_url=${conn_url}"
-cart_props "username=${username}"
-cart_props "password=${password}"
-cart_props "database_name=${oracle_db_name}"
+if [ "x$OPENSHIFT_ORACLEJDBC_USERNAME" == "x" ]; then
+  OPENSHIFT_ORACLEJDBC_USERNAME="${oracle.db.username}"
+  set_env_var 'OPENSHIFT_ORACLEJDBC_USERNAME' "$OPENSHIFT_ORACLEJDBC_USERNAME" $env_dir
+fi
 
-${OPENSHIFT_JBOSSEAP_DIR}/bin/tools/jboss-cli.sh -c --controller=${OPENSHIFT_JBOSSEAP_IP}:${OPENSHIFT_JBOSSEAP_MANAGEMENT_NATIVE_PORT} --file=${OPENSHIFT_ORACLEJDBC_DIR}/configuration/oraclejdbc.cli
-cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_REPO_DIR}/.openshift/config/
+if [ "x$OPENSHIFT_ORACLEJDBC_PASSWORD" == "x" ]; then
+  OPENSHIFT_ORACLEJDBC_PASSWORD="${oracle.db.password}"
+  set_env_var 'OPENSHIFT_ORACLEJDBC_PASSWORD' "$OPENSHIFT_ORACLEJDBC_PASSWORD" $env_dir
+fi
 
-${OPENSHIFT_JBOSSEAP_DIR}/bin/control restart
+client_result "Oracle JDBC cartridge ${project.version} installed (supports Oracle JDBC driver ${oracle_jdbc_version})."
 
-client_result "Oracle JDBC ${oracle.jdbc.version} added."
+client_result ""
+client_result "Please make note of these credentials:"
+client_result ""
+client_result "  Host        : ${OPENSHIFT_ORACLEJDBC_HOST}"
+client_result "  Port        : ${OPENSHIFT_ORACLEJDBC_PORT}"
+client_result "  Username    : ${OPENSHIFT_ORACLEJDBC_USERNAME}"
+client_result "  Password    : ${OPENSHIFT_ORACLEJDBC_PASSWORD}"
+client_result "  Schema Name : ${OPENSHIFT_ORACLEJDBC_SCHEMA_NAME}"
+client_result ""
+
+cart_props "jndi_name=${OPENSHIFT_ORACLEJDBC_JNDI_NAME}"
+cart_props "host=${OPENSHIFT_ORACLEJDBC_HOST}"
+cart_props "port=${OPENSHIFT_ORACLEJDBC_PORT}"
+cart_props "schema_name=${OPENSHIFT_ORACLEJDBC_SCHEMA_NAME}"
+cart_props "username=${OPENSHIFT_ORACLEJDBC_USERNAME}"
+cart_props "password=${OPENSHIFT_ORACLEJDBC_PASSWORD}"

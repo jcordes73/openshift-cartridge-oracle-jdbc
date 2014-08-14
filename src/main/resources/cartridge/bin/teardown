@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Removes Oracle JDBC configuration from an JBoss EAP instance
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source ${OPENSHIFT_ORACLEJDBC_DIR}/bin/util
+
+case "$1" in
+  -v|--version) oracle_jdbc_version="$2"
+  ;;
+  *) oracle_jdbc_version=${oracle.jdbc.version}
+  ;;
+esac
+
+if  ! isrunning; then
+  client_error "Oracle JDBC cartridge ${project.version} teardown failed because JBoss is not started."
+  exit 1
+fi
+
+if  ! ismgmtup; then
+  client_error "Oracle JDBC cartridge ${project.version} teardown failed because JBoss management interface is not up."
+  exit 1
+fi
+
+execute_cli ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/teardown.cli
+
+cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_REPO_DIR}/.openshift/config/
+cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}/versions/6/standalone/configuration
+cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}/template/.openshift/config/
+
+rm -rf $OPENSHIFT_REPO_DIR/.openshift/config/modules/com/oracle
+
+client_result "Oracle JDBC cartridge ${project.version} removed (supported Oracle JDBC ${oracle_jdbc_version})."

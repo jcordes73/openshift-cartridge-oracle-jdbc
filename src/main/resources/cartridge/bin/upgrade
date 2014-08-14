@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+CARTRIDGE_VERSION=$1
+FROM_VERSION=$2
+TO_VERSION=$3
+
+cp ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/${TO_VERSION}/ojdbc6.jar ${OPENSHIFT_REPO_DIR}/.openshift/config/modules/com/oracle/jdbc/main
+
+${OPENSHIFT_JBOSSEAP_DIR}/bin/control restart
+
+client_result "Oracle JDBC cartridge upgraded to $CARTRIDGE_VERSION (Oracle JDBC driver upgraded from $FROM_VERSION to $TO_VERSION)."
