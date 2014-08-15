@@ -14,27 +14,33 @@ Categories:
   - database
   - embedded
 Cart-Data:
+- Key: jndi_name
+  Type: cart_data
+  Description: Oracle database JNDI name
+- Key: host
+  Type: cart_data
+  Description: Oracle database host  
+- Key: port
+  Type: cart_data
+  Description: Oracle database port
 - Key: username
   Type: cart_data
   Description: User on Oracle database
 - Key: password
   Type: cart_data
   Description: Password for user on Oracle database
-- Key: database_name
+- Key: schema_name
   Type: cart_data
-  Description: Oracle DB name
-- Key: connection_url
-  Type: cart_data
-  Description: Oracle DB connection URL
+  Description: Oracle DB schema name
 Website: https://www.redhat.com/products/cloud-computing/openshift-enterprise/
 Help-Topics:
   "Cartridge Specification Guide": https://access.redhat.com/site/documentation/en-US/OpenShift_Enterprise/2/html-single/Cartridge_Specification_Guide/
   "User Guide": https://access.redhat.com/site/documentation/en-US/OpenShift_Enterprise/2/html-single/User_Guide/
   "Administration Guide": https://access.redhat.com/site/documentation/en-US/OpenShift_Enterprise/2/html-single/Administration_Guide/
 Provides:
-  - "oraclejdbc"
+  - oraclejdbc
 Requires:
-  - "jbosseap"
+  - jbosseap
 Conflicts:
 Native-Requires:
 Architecture: noarch

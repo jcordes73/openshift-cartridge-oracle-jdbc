@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redhat.openshift</groupId>
   <artifactId>openshift-cartridge-oracle-jdbc</artifactId>
-  <version>1.0.9</version>
+  <version>1.0.12</version>
   <packaging>rpm</packaging>
   <name>openshift-cartridge-oracle-jdbc</name>
   <url>http://maven.apache.org</url>
@@ -11,8 +11,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <oracle.jdbc.version>11.2.0.3.0</oracle.jdbc.version>
     <oracle.db.jndiName>java:jboss/datasources/RoutingDS</oracle.db.jndiName>
-    <oracle.db.host>MYHOST</oracle.db.host>
-    <oracle.db.port>MYPORT</oracle.db.port>
+    <oracle.db.host>l083.mgi.de</oracle.db.host>
+    <oracle.db.port>15083</oracle.db.port>
     <oracle.db.schemaName>SID</oracle.db.schemaName>
     <oracle.db.username>scott</oracle.db.username>
     <oracle.db.password>tiger</oracle.db.password>

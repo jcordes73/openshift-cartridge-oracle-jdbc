@@ -1,3 +1,4 @@
+
 function ismgmtup() {
     let count=0
     while [ ${count} -lt 10 ]
@@ -34,4 +35,9 @@ function execute_cli() {
     -c --timeout=15000 \
     --controller=${OPENSHIFT_JBOSSEAP_IP}:${OPENSHIFT_JBOSSEAP_MANAGEMENT_NATIVE_PORT} \
     --file=$1
+}
+
+function pretty_print_client_result() {
+    message="`echo "" | awk '{printf("  %-20s : %-20s", key, value)}' key=$1 value=$2`"
+    client_result "$message"
 }
