@@ -88,9 +88,9 @@ When creating the cartridge you can pass the following environment variables to 
 
 |Name|Default (pom.xml)|
 |----|------------------|
-|OPENSHIFT_ORACLEJDBC_JNDI_NAME|oracle.jdbc.jndiName|
+|OPENSHIFT_ORACLEJDBC_JNDINAME|oracle.jdbc.jndiName|
 |OPENSHIFT_ORACLEJDBC_HOST|oracle.db.host|
 |OPENSHIFT_ORACLEJDBC_PORT|oracle.db.port|
-|OPENSHIFT_ORACLEJDBC_SCHEMA_NAME|oracle.db.schemaName|
+|OPENSHIFT_ORACLEJDBC_SCHEMANAME|oracle.db.schemaName|
 |OPENSHIFT_ORACLEJDBC_USERNAME|oracle.db.username|
 |OPENSHIFT_ORACLEJDBC_PASSWORD|oracle.db.password|

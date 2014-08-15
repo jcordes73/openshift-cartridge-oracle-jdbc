@@ -14,7 +14,7 @@ Categories:
   - database
   - embedded
 Cart-Data:
-- Key: jndi_name
+- Key: jndiname
   Type: cart_data
   Description: Oracle database JNDI name
 - Key: host
@@ -29,7 +29,7 @@ Cart-Data:
 - Key: password
   Type: cart_data
   Description: Password for user on Oracle database
-- Key: schema_name
+- Key: schemaname
   Type: cart_data
   Description: Oracle DB schema name
 Website: https://www.redhat.com/products/cloud-computing/openshift-enterprise/
