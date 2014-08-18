@@ -23,6 +23,7 @@ if  ! ismgmtup; then
 fi
 
 execute_cli ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/teardown.cli
+execute_cli ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/unset-properties.cli
 
 cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_REPO_DIR}/.openshift/config/
 cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}/versions/6/standalone/configuration

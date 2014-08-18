@@ -1,0 +1,6 @@
+/system-property=OPENSHIFT_ORACLEJDBC_JNDINAME:remove()
+/system-property=OPENSHIFT_ORACLEJDBC_HOST:remove()
+/system-property=OPENSHIFT_ORACLEJDBC_PORT:remove()
+/system-property=OPENSHIFT_ORACLEJDBC_SCHEMANAME:remove()
+/system-property=OPENSHIFT_ORACLEJDBC_USERNAME:remove()
+/system-property=OPENSHIFT_ORACLEJDBC_PASSWORD:remove()

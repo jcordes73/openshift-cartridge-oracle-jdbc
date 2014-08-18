@@ -1,10 +1,11 @@
 # Create Oracle JDBC datasource
 /subsystem=datasources/jdbc-driver=oracle:add(driver-module-name=com.oracle.jdbc,driver-name=oracle,driver-xa-datasource-class-name=oracle.jdbc.xa.client.OracleXADataSource)
-/subsystem=datasources/data-source=OracleDS:add(jndi-name="${env.OPENSHIFT_ORACLEJDBC_JNDINAME}", connection-url="jdbc:oracle:thin:@${env.OPENSHIFT_ORACLEJDBC_HOST}:${env.OPENSHIFT_ORACLEJDBC_PORT}:${env.OPENSHIFT_ORACLEJDBC_SCHEMANAME}",driver-name=oracle,user-name="${env.OPENSHIFT_ORACLEJDBC_USERNAME}", password="${env.OPENSHIFT_ORACLEJDBC_PASSWORD}", valid-connection-checker-class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker",stale-connection-checker-class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleStaleConnectionChecker",exception-sorter-class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter", enabled="true")
+/subsystem=datasources/data-source=OracleDS:add(jndi-name="${OPENSHIFT_ORACLEJDBC_JNDINAME}", connection-url="jdbc:oracle:thin:@${OPENSHIFT_ORACLEJDBC_HOST}:${OPENSHIFT_ORACLEJDBC_PORT}:${OPENSHIFT_ORACLEJDBC_SCHEMANAME}",driver-name=oracle,user-name="${OPENSHIFT_ORACLEJDBC_USERNAME}", password="${OPENSHIFT_ORACLEJDBC_PASSWORD}", valid-connection-checker-class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker",stale-connection-checker-class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleStaleConnectionChecker",exception-sorter-class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter", enabled="true")
 
 # Remove unused datasources for H2, MySQL and PostgreSQL
 /subsystem=datasources/data-source=H2DS:remove()
 /subsystem=datasources/data-source=MysqlDS:remove()
+/subsystem=datasources/data-source=MySQLDS:remove()
 /subsystem=datasources/data-source=PostgreSQLDS:remove()
 /subsystem=datasources/jdbc-driver=h2:remove()
 /subsystem=datasources/jdbc-driver=mysql:remove()

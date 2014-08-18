@@ -25,6 +25,14 @@ mkdir -p ${OPENSHIFT_REPO_DIR}/.openshift/config/modules/com/oracle/jdbc/main
 cp ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/module.xml ${OPENSHIFT_REPO_DIR}/.openshift/config/modules/com/oracle/jdbc/main
 cp ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/${oracle_jdbc_version}/ojdbc6.jar ${OPENSHIFT_REPO_DIR}/.openshift/config/modules/com/oracle/jdbc/main
 
+echo "/system-property=OPENSHIFT_ORACLEJDBC_JNDINAME:add(value=\"$OPENSHIFT_ORACLEJDBC_JNDINAME\")" > ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/set-properties.cli
+echo "/system-property=OPENSHIFT_ORACLEJDBC_HOST:add(value=\"$OPENSHIFT_ORACLEJDBC_HOST\")" >> ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/set-properties.cli
+echo "/system-property=OPENSHIFT_ORACLEJDBC_PORT:add(value=\"$OPENSHIFT_ORACLEJDBC_PORT\")" >> ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/set-properties.cli
+echo "/system-property=OPENSHIFT_ORACLEJDBC_SCHEMANAME:add(value=\"$OPENSHIFT_ORACLEJDBC_SCHEMANAME\")" >> ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/set-properties.cli
+echo "/system-property=OPENSHIFT_ORACLEJDBC_USERNAME:add(value=\"$OPENSHIFT_ORACLEJDBC_USERNAME\")" >> ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/set-properties.cli
+echo "/system-property=OPENSHIFT_ORACLEJDBC_PASSWORD:add(value=\"$OPENSHIFT_ORACLEJDBC_PASSWORD\")" >> ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/set-properties.cli
+
+execute_cli ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/set-properties.cli
 execute_cli ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/install.cli
 
 cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_REPO_DIR}/.openshift/config/
