@@ -23,12 +23,6 @@ if  ! ismgmtup; then
 fi
 
 execute_cli ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/teardown.cli
-execute_cli ${OPENSHIFT_ORACLEJDBC_DIR}/configuration/unset-properties.cli
-
-cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_REPO_DIR}/.openshift/config/
-cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}/versions/6/standalone/configuration
-cp ${OPENSHIFT_JBOSSEAP_DIR}/standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}/template/.openshift/config/
-
-rm -rf $OPENSHIFT_REPO_DIR/.openshift/config/modules/com/oracle
+copy_jboss_config
 
 client_result "Oracle JDBC cartridge ${project.version} removed (supported Oracle JDBC ${oracle_jdbc_version})."

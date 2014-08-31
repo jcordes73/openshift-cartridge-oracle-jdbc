@@ -3,7 +3,7 @@
 # Embeds Oracle-JDBC configuration into an JBoss EAP instance
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
-source ${OPENSHIFT_ORACLEJDBC_DIR}/bin/util
+source ${OPENSHIFT_ORACLEJDBC_DIR}bin/util
 
 case "$1" in
   -v|--version) oracle_jdbc_version="$2"
@@ -12,7 +12,7 @@ case "$1" in
   ;;
 esac
 
-env_dir="${OPENSHIFT_ORACLEJDBC_DIR}/env"
+env_dir="${OPENSHIFT_ORACLEJDBC_DIR}env"
 
 client_result "Oracle JDBC cartridge ${project.version} installed (supports Oracle JDBC driver ${oracle_jdbc_version})."
 

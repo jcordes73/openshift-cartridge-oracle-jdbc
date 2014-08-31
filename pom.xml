@@ -10,9 +10,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <oracle.jdbc.version>11.2.0.3.0</oracle.jdbc.version>
-    <oracle.db.jndiName>java:jboss/datasources/RoutingDS</oracle.db.jndiName>
-    <oracle.db.host>l083.mgi.de</oracle.db.host>
-    <oracle.db.port>15083</oracle.db.port>
+    <oracle.db.jndiName>java:jboss/datasources/OracleDS</oracle.db.jndiName>
+    <oracle.db.host>localhost</oracle.db.host>
+    <oracle.db.port>1521</oracle.db.port>
     <oracle.db.schemaName>SID</oracle.db.schemaName>
     <oracle.db.username>scott</oracle.db.username>
     <oracle.db.password>tiger</oracle.db.password>

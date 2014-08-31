@@ -41,3 +41,12 @@ function pretty_print_client_result() {
     message="`echo "" | awk '{printf("  %-20s : %-20s", key, value)}' key=$1 value=$2`"
     client_result "$message"
 }
+
+function copy_jboss_config() {
+  mkdir -p ${OPENSHIFT_REPO_DIR}.openshift/config
+
+  cp ${OPENSHIFT_JBOSSEAP_DIR}standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}jboss_cfg_backup
+  cp ${OPENSHIFT_JBOSSEAP_DIR}standalone/configuration/standalone.xml ${OPENSHIFT_REPO_DIR}.openshift/config
+  cp ${OPENSHIFT_JBOSSEAP_DIR}standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}versions/6/standalone/configuration
+  cp ${OPENSHIFT_JBOSSEAP_DIR}standalone/configuration/standalone.xml ${OPENSHIFT_JBOSSEAP_DIR}template/.openshift/config
+}

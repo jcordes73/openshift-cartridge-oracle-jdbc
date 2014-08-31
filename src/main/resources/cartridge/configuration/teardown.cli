@@ -1,3 +1,8 @@
-# Remove datasources for Oracle
-/subsystem=datasources/data-source=OracleDS:remove()
-/subsystem=datasources/jdbc-driver=oracle:remove()
+# Remove datasources for Oracle if it exists
+if (outcome == success) of /subsystem=datasources/data-source=OracleDS:read-resource()
+  /subsystem=datasources/data-source=OracleDS:remove()
+end-if
+
+if (outcome == success) of /subsystem=datasources/jdbc-driver=oracle:read-resource()
+  /subsystem=datasources/jdbc-driver=oracle:remove()
+end-if

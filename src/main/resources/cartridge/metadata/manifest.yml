@@ -10,9 +10,8 @@ Cartridge-Version: ${project.version}
 Cartridge-Vendor: redhat
 
 Categories:
-  - service
-  - database
   - embedded
+  - database
 Cart-Data:
 - Key: jndiname
   Type: cart_data
@@ -40,16 +39,11 @@ Help-Topics:
 Provides:
   - oraclejdbc
 Requires:
-  - jbosseap
+  - jbosseap-6
 Conflicts:
 Native-Requires:
 Architecture: noarch
 Reservations:
-Components:
-  default:
-    Service-Dependencies:
-    Publishes:
-    Subscribes:
 Publishes:
 Subscribes:
 Scaling:

@@ -1,1 +1,1 @@
-<%= if (not ENV['OPENSHIFT_ORACLEJDBC_HOST'] or ENV['OPENSHIFT_ORACLEJDBC_HOST'].empty?) then "${oracle.db.host}" else ENV['OPENSHIFT_ORACLEJDBC_host'] end %>
+<%= if (not ENV['OPENSHIFT_ORACLEJDBC_HOST'] or ENV['OPENSHIFT_ORACLEJDBC_HOST'].empty?) then ENV['OPENSHIFT_ORACLEJDBC_HOST'] = "${oracle.db.host}" end ; ENV['OPENSHIFT_ORACLEJDBC_HOST'] %>

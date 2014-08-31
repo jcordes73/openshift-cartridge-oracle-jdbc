@@ -2,7 +2,7 @@
 
 ## Description
 
-An OpenShift cartridge for provisioning a Oracle JDBC driver and a Oracle datasourc on JBoss EAP 6 cartridge.
+An OpenShift Enterprise cartridge for provisioning a Oracle JDBC driver and a Oracle datasourc on a JBoss EAP 6 cartridge.
 
 ## Adding Oracle JDBC driver
 
@@ -11,7 +11,7 @@ First you have to download the Oracle JDBC driver from http://www.oracle.com/tec
 Afterwards copy the Oracle JDBC driver into the project
 
 ```bash
-cp ojdbc6.jar src/main/resources/modules/com/oracle/jdbc/main
+cp ojdbc6.jar src/main/resources/cartridge/configuration/${oracle.jdbc.version}/modules/com/oracle/jdbc/main
 ```
 
 ## Build
@@ -28,8 +28,9 @@ Below you can find information on what properties are used and can be overriden 
 
 |Property|Default|
 |--------|-------|
-|oracle.db.host|MYHOST|
-|oracle.db.port|MYHOST|
+|oracle.db.jndiName|java:jboss/datasources/OracleDS|
+|oracle.db.host|localhost|
+|oracle.db.port|1521|
 |oracle.db.schemaName|SID|
 |oracle.db.username|scott|
 |oracle.db.password|tiger|
@@ -52,14 +53,29 @@ rpm -ivh openshift-cartridge-oracle-jdbc-${project.version}.rpm
 
 After the RPM has been installed successfully you need to install the cartridge like this:
 
+###OSE 2.0
+
 ```bash
 oo-admin-cartridge -a install -s /usr/libexec/openshift/cartridges/oraclejdbc
 ```
 
+###OSE 2.1
+
+```bash
+oo-admin-ctl-cartridge -c import-node --activate
+
 The last installation step is to clear the caches on the OpenShift Broker:
+
+###OSE 2.0
 
 ```bash
 oo-admin-broker-cache --clear --console
+```
+
+###OSE 2.1
+
+```bash
+service ruby193-mcollective restart
 ```
 
 ## Remove
@@ -72,14 +88,33 @@ rpm -e openshift-cartridge-oracle-jdbc-${project.version}-1.noarch
 
 The next command will list all available OpenShift cartridges along with it's versions and cartridge-versions:
 
+###OSE 2.0
 ```bash
 oo-admin-cartridge -l
+```
+
+###OSE 2.1
+
+```bash
+oo-admin-ctl-cartridge -c list
 ```
 
 Finally you delete the cartridge using this command
 
 ```bash
 oo-admin-cartridge -a erase --name oraclejdbc --version ${oracle.jdbc.version} --cartridge_version ${project.version}
+```
+
+###OSE 2.0
+
+```bash
+oo-admin-cartridge -a erase --name oraclejdbc --version ${oracle.jdbc.version} --cartridge_version ${project.version}
+```
+
+###OSE 2.1
+
+```bash
+oo-admin-ctl-cartridge -c delete -n oraclejdbc-${project.version}
 ```
 
 ## Cartridge creation
