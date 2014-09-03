@@ -28,9 +28,9 @@ Cart-Data:
 - Key: password
   Type: cart_data
   Description: Password for user on Oracle database
-- Key: schemaname
+- Key: sid
   Type: cart_data
-  Description: Oracle DB schema name
+  Description: Oracle DB SID
 Website: https://www.redhat.com/products/cloud-computing/openshift-enterprise/
 Help-Topics:
   "Cartridge Specification Guide": https://access.redhat.com/site/documentation/en-US/OpenShift_Enterprise/2/html-single/Cartridge_Specification_Guide/

@@ -2,7 +2,7 @@
 
 ## Description
 
-An OpenShift Enterprise cartridge for provisioning a Oracle JDBC driver and a Oracle datasourc on a JBoss EAP 6 cartridge.
+An OpenShift Enterprise cartridge for provisioning a Oracle JDBC driver and a Oracle datasourc on a JBoss EAP 6 cartridge. The datasource does not provide support for JTA transactions.
 
 ## Adding Oracle JDBC driver
 
@@ -31,7 +31,7 @@ Below you can find information on what properties are used and can be overriden 
 |oracle.db.jndiName|java:jboss/datasources/OracleDS|
 |oracle.db.host|localhost|
 |oracle.db.port|1521|
-|oracle.db.schemaName|SID|
+|oracle.db.sid|SID|
 |oracle.db.username|scott|
 |oracle.db.password|tiger|
 |rpm.key.name|D3AABAF5|
@@ -126,6 +126,6 @@ When creating the cartridge you can pass the following environment variables to 
 |OPENSHIFT_ORACLEJDBC_JNDINAME|oracle.jdbc.jndiName|
 |OPENSHIFT_ORACLEJDBC_HOST|oracle.db.host|
 |OPENSHIFT_ORACLEJDBC_PORT|oracle.db.port|
-|OPENSHIFT_ORACLEJDBC_SCHEMANAME|oracle.db.schemaName|
+|OPENSHIFT_ORACLEJDBC_SID|oracle.db.sid|
 |OPENSHIFT_ORACLEJDBC_USERNAME|oracle.db.username|
 |OPENSHIFT_ORACLEJDBC_PASSWORD|oracle.db.password|
